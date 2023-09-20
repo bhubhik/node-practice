@@ -3,7 +3,8 @@ const waitTime = 4000;
 console.log(`Setting a timer for ${waitTime / 1000} seconds.`);
 const timerFinished = () => {
   clearInterval(interval);
-  console.log('Food heated!');
+  process.stdout.clearLine();
+  console.log('\nFood heated!');
 };
 
 setTimeout(timerFinished, waitTime);
@@ -13,7 +14,10 @@ let currentTime = 0;
 
 const incrementTime = () => {
   currentTime += waitInterval;
-  console.log(`Waiting time ${currentTime / 1000} seconds.`);
+  const time = Math.floor(currentTime / 1000);
+  process.stdout.clearLine();
+  process.stdout.cursorTo(0);
+  process.stdout.write(`Waiting... ${time} second.`);
 };
 
 const interval = setInterval(incrementTime, waitInterval);
